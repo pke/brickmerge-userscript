@@ -2,7 +2,7 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.3
+// @version        1.4
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
@@ -12,8 +12,8 @@
 // @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
 // @match          https://www.toys-for-fun.com/de/lego*
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
+// @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
-// @grant          GM_log
 // ==/UserScript==
 
 (function() {
@@ -64,14 +64,14 @@
 
     // Fetch the LEGO set number from the title
     const title = document.querySelector(resolver.articleSelector)?.textContent;
-    GM_log?.("title: ", title);
+    //console.log("title: ", title);
     const [, setNumber] = /(\d+)/.exec(title) || [];
-    GM_log?.("set number: ", setNumber);
+    //console.log("set number: ", setNumber);
     if (setNumber) {
         fetch(`https://www.brickmerge.de/_app.php?find=${setNumber}&json_token=zNrPtJiFeOoOLpDjAMctsNzOrvi8KipF`)
         .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
         .then(({ offers, error, url }) => {
-            GM_log?.("offers", offers);
+            //console.log("offers", offers);
             if (!offers && !error) {
                 return;
             }
@@ -84,7 +84,7 @@
                 const lowestPrice = Number(offers?.lowPrice).toLocaleString("de-DE", {style: "currency", currency: offers?.priceCurrency || "EUR" });
                 if (lowestPrice) {
                     for (let element of targets) {
-                        //GM_log("target:", element.innerHTML);
+                        //console.log("target:", element.innerHTML);
                         addLowestPrice(element, url, lowestPrice);
                     }
                 }
