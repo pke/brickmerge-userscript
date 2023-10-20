@@ -2,7 +2,7 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.2
+// @version        1.3
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
@@ -47,12 +47,12 @@
         element.append(errorElement);
     }
 
-    function addLowestPrice(element, setNumber, lowestPrice) {
+    function addLowestPrice(element, url, lowestPrice) {
         if (!element) {
             return;
         }
         const brickmergeBox = document.createElement("div");
-        const brickmergeLink = `<a href="https://brickmerge.de/${setNumber}">${lowestPrice}</a>`;
+        const brickmergeLink = `<a href="${url}">${lowestPrice}</a>`;
         brickmergeBox.innerHTML = `<span>brickmerge Bestpreis: ${brickmergeLink}</span>`;
         element.append(brickmergeBox);
     }
@@ -70,7 +70,7 @@
     if (setNumber) {
         fetch(`https://www.brickmerge.de/_app.php?find=${setNumber}&json_token=zNrPtJiFeOoOLpDjAMctsNzOrvi8KipF`)
         .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
-        .then(({ offers, error }) => {
+        .then(({ offers, error, url }) => {
             GM_log?.("offers", offers);
             if (!offers && !error) {
                 return;
@@ -85,7 +85,7 @@
                 if (lowestPrice) {
                     for (let element of targets) {
                         //GM_log("target:", element.innerHTML);
-                        addLowestPrice(element, setNumber, lowestPrice);
+                        addLowestPrice(element, url, lowestPrice);
                     }
                 }
             }
