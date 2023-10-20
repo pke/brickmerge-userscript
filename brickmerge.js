@@ -2,7 +2,7 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.0
+// @version        1.1
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
@@ -21,19 +21,19 @@
 
     const resolvers = {
         "www.amazon.de": {
-            setSelector: "#productTitle",
+            articleSelector: "#productTitle",
             targetSelector: "#corePriceDisplay_desktop_feature_div,#corePrice_feature_div",
         },
         "www.mytoys.de": {
-            setSelector: ".prod-info__name",
+            articleSelector: ".prod-info__name",
             targetSelector: ".prod-info__price-container",
         },
         "www.smythstoys.com": {
-            setSelector: "h1[itemprop=name]",
+            articleSelector: "h1[itemprop=name]",
             targetSelector: "#product-info div[itemprop=price]",
         },
         "www.toys-for-fun.com": {
-            setSelector: "h1.page-title span[itemprop=name]",
+            articleSelector: "h1.page-title span[itemprop=name]",
             targetSelector: ".product-info-price",
         },
     };
@@ -63,7 +63,7 @@
     }
 
     // Fetch the LEGO set number from the title
-    const title = document.querySelector(resolver.setSelector)?.textContent;
+    const title = document.querySelector(resolver.articleSelector)?.textContent;
     GM_log("title: ", title);
     const [, setNumber] = /(\d+)/.exec(title) || [];
     GM_log("set number: ", setNumber);
