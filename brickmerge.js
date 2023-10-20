@@ -2,7 +2,7 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.4
+// @version        1.5
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
@@ -11,6 +11,7 @@
 // @match          https://www.mytoys.de/lego-*
 // @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
 // @match          https://www.toys-for-fun.com/de/lego*
+// @match          https://www.jb-spielwaren.de/*
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
@@ -35,6 +36,10 @@
         "www.toys-for-fun.com": {
             articleSelector: "h1.page-title span[itemprop=name]",
             targetSelector: ".product-info-price",
+        },
+        "www.jb-spielwaren.de": {
+            articleSelector: "h1",
+            targetSelector: ".crossprice",
         },
     };
 
