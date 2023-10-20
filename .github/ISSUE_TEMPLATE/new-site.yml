@@ -3,22 +3,39 @@ description: Schlage einen neuen Onlineshop vor
 title: "[Shop]: "
 labels: ["enhancement", "shop"]
 body:
-  - type: markdown
-    attributes:
-      value: |
-        Thanks for taking the time to fill out this bug report!
   - type: input
     id: url
     attributes:
       label: Shop URL
       description: Wie lautet die URL des Shops?
+      placeholder: https://
     validations:
       required: true
-  - type: input
-    id: setSelector
+  - type: markdown
     attributes:
-      label: Set Nummer CSS Selektor
-      description: Wo befindet sich auf der Shopseite die LEGO Set Nummer?
+      value: |
+        ## Expertenmodus
+
+        Wer sich mit CSS3 Selektoren auskennt, kann die 2 folgenden Felder auch ausfüllen.
+        Damit kann der Shop schneller integriert werden.
+  - type: input
+    id: articleNumberSelector
+    attributes:
+      label: Artikel Nummer Selektor
+      description: In welchem HTML Element befindet sich auf der Shopseite die LEGO Set Nummer?
     validations:
-      required: true
+      required: false
+  - type: markdown
+    attributes:
+      value: Bitte einen gültigen CSS3 Selektor verwenden.
+  - type: input
+    id: targetSelector
+    attributes:
+      label: Wo soll der brickmerge® Preis eingefügt werden?
+      description: Nach welchem HTML Element soll der brickmerge® Preis eingefügt werden?
+    validations:
+      required: false
+  - type: markdown
+    attributes:
+      value: Bitte einen gültigen CSS3 Selektor verwenden.
     
