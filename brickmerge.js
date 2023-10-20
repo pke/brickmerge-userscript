@@ -2,7 +2,7 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.1
+// @version        1.2
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
@@ -64,14 +64,14 @@
 
     // Fetch the LEGO set number from the title
     const title = document.querySelector(resolver.articleSelector)?.textContent;
-    GM_log("title: ", title);
+    GM_log?.("title: ", title);
     const [, setNumber] = /(\d+)/.exec(title) || [];
-    GM_log("set number: ", setNumber);
+    GM_log?.("set number: ", setNumber);
     if (setNumber) {
         fetch(`https://www.brickmerge.de/_app.php?find=${setNumber}&json_token=zNrPtJiFeOoOLpDjAMctsNzOrvi8KipF`)
         .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
         .then(({ offers, error }) => {
-            GM_log("offers", offers);
+            GM_log?.("offers", offers);
             if (!offers && !error) {
                 return;
             }
