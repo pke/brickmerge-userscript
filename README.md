@@ -4,10 +4,11 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 
 ## Unterstützte Online Shops
 
-amazon.de
-mytoys.de
-smythstoys.com
-toys-for-fun.com
+* amazon.de
+* mytoys.de
+* smythstoys.com
+* toys-for-fun.com
+* jb-spielwaren.de
 
 ## Neuen Shop vorschlagen
 
