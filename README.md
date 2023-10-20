@@ -9,6 +9,7 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 * smythstoys.com
 * toys-for-fun.com
 * jb-spielwaren.de
+* steinehelden.de
 
 ## Neuen Shop vorschlagen
 
