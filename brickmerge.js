@@ -2,7 +2,7 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.5
+// @version        1.6
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
@@ -24,22 +24,27 @@
         "www.amazon.de": {
             articleSelector: "#productTitle",
             targetSelector: "#corePriceDisplay_desktop_feature_div,#corePrice_feature_div",
+            testURL: "https://www.amazon.de/LEGO-43230-Disney-Kamera-Maus-Minifiguren/dp/B0BV7BMPVS",
         },
         "www.mytoys.de": {
             articleSelector: ".prod-info__name",
             targetSelector: ".prod-info__price-container",
+            testURL: "https://www.mytoys.de/lego-lego-disney-43230-kamera--hommage-an-walt-disney-29981540.html",
         },
         "www.smythstoys.com": {
             articleSelector: "h1[itemprop=name]",
             targetSelector: "#product-info div[itemprop=price]",
+            testURL: "https://www.smythstoys.com/de/de-de/spielzeug/lego/lego-fuer-erwachsene/lego-icons-set-10266-nasa-apollo-11-mondlandefaehre/p/183613",
         },
         "www.toys-for-fun.com": {
             articleSelector: "h1.page-title span[itemprop=name]",
             targetSelector: ".product-info-price",
+            testURL: "https://www.toys-for-fun.com/de/legor-disney-43230-kamera-hommage-an-walt-disney.html",
         },
         "www.jb-spielwaren.de": {
             articleSelector: "h1",
             targetSelector: ".crossprice",
+            testURL: "https://www.jb-spielwaren.de/lego-10293-besuch-des-weihnachtsmanns/a-10293/",
         },
     };
 
