@@ -2,7 +2,7 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.9
+// @version        1.91
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
@@ -47,7 +47,7 @@
       },
       "www.jb-spielwaren.de": {
           articleSelector: "h1",
-          targetSelector: ".crossprice",
+          targetSelector: ".widget-availability",
           testURL: "https://www.jb-spielwaren.de/lego-10293-besuch-des-weihnachtsmanns/a-10293/",
       },
       "steinehelden.de": {
