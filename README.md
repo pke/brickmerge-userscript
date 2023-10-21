@@ -11,7 +11,7 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 * jb-spielwaren.de
 * steinehelden.de
 * proshop.de
-
+* alternate.de
 ## Neuen Shop vorschlagen
 
 Dazu einfach diese [Eingabemaske](https://github.com/pke/brickmerge-userscript/issues/new?template=new-site.yml) ausfüllen.

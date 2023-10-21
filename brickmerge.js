@@ -7,6 +7,7 @@
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
 // @author         Philipp Kursawe <pke@pke.fyi>
+// @match          https://www.alternate.de/LEGO/*
 // @match          https://www.amazon.de/LEGO-*
 // @match          https://www.mytoys.de/lego-*
 // @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
@@ -14,6 +15,7 @@
 // @match          https://www.jb-spielwaren.de/*
 // @match          https://steinehelden.de/*
 // @match          https://www.proshop.de/LEGO/*
+
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
@@ -58,6 +60,11 @@
           targetSelector: "#site-product-price-stock-buy-container span.site-currency-wrapper",
           testURL: "https://www.proshop.de/LEGO/LEGO-Ideas-21343-Wikingerdorf/3195765",
       },
+      "www.alternate.de": {
+        articleSelector: "head > title",
+        targetSelector: "#product-top-right .vat-and-shipping-costs",
+        testURL: "https://www.alternate.de/LEGO/10311-Creator-Expert-Orchidee-Konstruktionsspielzeug/html/product/1818749",
+      },
   };
 
   function renderError(element, error) {
@@ -75,7 +82,7 @@
       }
       const brickmergeBox = document.createElement("div");
       const brickmergeLink = `<a href="${url}">${lowestPrice}</a>`;
-      brickmergeBox.innerHTML = `<span>brickmerge Bestpreis: ${brickmergeLink}</span>`;
+      brickmergeBox.innerHTML = `<span>brickmerge® Bestpreis: ${brickmergeLink}</span>`;
       element.append(brickmergeBox);
   }
 
