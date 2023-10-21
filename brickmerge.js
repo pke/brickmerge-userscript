@@ -2,20 +2,20 @@
 // @name           brickmerge® Prices
 // @name:de        brickmerge® Preise
 // @namespace      https://brickmerge.de/
-// @version        1.8
+// @version        1.9
 // @license        MIT
 // @description    Displays lowest brickmerge® price next to offer price
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
 // @author         Philipp Kursawe <pke@pke.fyi>
 // @match          https://www.alternate.de/LEGO/*
 // @match          https://www.amazon.de/LEGO-*
-// @match          https://www.mytoys.de/lego-*
-// @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
-// @match          https://www.toys-for-fun.com/de/lego*
 // @match          https://www.jb-spielwaren.de/*
-// @match          https://steinehelden.de/*
+// @match          https://www.mytoys.de/lego-*
+// @match          https://www.toys-for-fun.com/de/lego*
 // @match          https://www.proshop.de/LEGO/*
-
+// @match          https://steinehelden.de/*
+// @match          https://www.saturn.de/de/product/_lego-*
+// @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
@@ -64,6 +64,11 @@
         articleSelector: "head > title",
         targetSelector: "#product-top-right .vat-and-shipping-costs",
         testURL: "https://www.alternate.de/LEGO/10311-Creator-Expert-Orchidee-Konstruktionsspielzeug/html/product/1818749",
+      },
+      "www.saturn.de": {
+        articleSelector: "head > title",
+        targetSelector: "div[data-test='mms-branded-price']",
+        testURL: "https://www.saturn.de/de/product/_lego-10281-bonsai-baum-2672008.html",
       },
   };
 
