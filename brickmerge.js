@@ -10,6 +10,7 @@
 // @match          https://www.alternate.de/LEGO/*
 // @match          https://www.amazon.de/LEGO-*
 // @match          https://www.jb-spielwaren.de/*
+// @match          https://www.mediamarkt.de/de/product/_lego-*
 // @match          https://www.mytoys.de/lego-*
 // @match          https://www.toys-for-fun.com/de/lego*
 // @match          https://www.proshop.de/LEGO/*
@@ -67,31 +68,79 @@
       },
       "www.saturn.de": {
         articleSelector: "head > title",
-        targetSelector: "div[data-test='mms-branded-price']",
+        targetSelector: "div[data-test='mms-pdp-offer-selection']",
+        prepend: true,
+        dynamic: true, // Site changes its DOM via script and could remove our element
+        styleSelector: "div[data-test='mms-branded-price'] p > span",
+        style(element) {
+            element.querySelector("a").style = "text-decoration: underline";
+            element.style = "text-align: right";
+        },
         testURL: "https://www.saturn.de/de/product/_lego-10281-bonsai-baum-2672008.html",
       },
+      "www.mediamarkt.de": "www.saturn.de", // just an alias, same as saturn
   };
 
-  function renderError(element, error) {
+  function renderError(element, error, operation = "append") {
       if (!element) {
           return;
       }
       const errorElement = document.createElement("div");
-      errorElement.innerText = error;
-      element.append(errorElement);
+      errorElement.innerText = error.message;
+      element[operation]?.(errorElement);
   }
 
-  function addLowestPrice(element, url, lowestPrice) {
+  function addLowestPrice(element, url, lowestPrice, operation = "append") {
       if (!element) {
           return;
       }
-      const brickmergeBox = document.createElement("div");
-      const brickmergeLink = `<a href="${url}">${lowestPrice}</a>`;
-      brickmergeBox.innerHTML = `<span>brickmerge® Bestpreis: ${brickmergeLink}</span>`;
-      element.append(brickmergeBox);
+      let brickmergeBox = element.querySelector(".brickmerge-price");
+      let isNew = !brickmergeBox;
+      console.log("addLowestPrice isNew: ", isNew);
+      if (!brickmergeBox) {
+          brickmergeBox = document.createElement("div");
+          brickmergeBox.className = "brickmerge-price";
+      }
+      const brickmergeLink = url ? `<a href="${url}">${lowestPrice}</a>` : "...";
+      brickmergeBox.innerHTML = `brickmerge® Bestpreis: ${brickmergeLink}`;
+      if (isNew) {
+          element[operation]?.(brickmergeBox);
+      }
+      return brickmergeBox;
   }
 
-  const resolver = resolvers[document.location.host]
+  function addPriceToTargets(resolver, priceOrError, url, styleClasses) {
+      const targets = document.querySelectorAll(resolver.targetSelector);
+      if (targets.length === 0) {
+          return;
+      }
+      const error = priceOrError instanceof Error && priceOrError
+      const price = error ? undefined : priceOrError
+      if (error instanceof Error) {
+          for (let element of targets) {
+              renderError(element, error, resolver.prepend ? "prepend" : "append");
+          }
+      } else if (price) {
+          for (let element of targets) {
+              //console.log("target:", element.innerHTML);
+              const box = addLowestPrice(element, url, price, resolver.prepend ? "prepend" : "append");
+              if (styleClasses) {
+                  box.className = styleClasses;
+              }
+              if (typeof resolver.style === "function") {
+                  resolver.style(box);
+              } else if (typeof resolver.style === "string") {
+                  box.style = resolver.style;
+              }
+          }
+      }
+  }
+
+  let resolver = resolvers[document.location.host]
+  // Do we have an alias for another resolver?
+  if (typeof resolver === "string") {
+      resolver = resolvers[resolver];
+  }
   if (!resolver) {
       return;
   }
@@ -101,7 +150,15 @@
   //console.log("title: ", title);
   const [, setNumber] = /(\d+)/.exec(title) || [];
   //console.log("set number: ", setNumber);
+
+  const styleNode = document.querySelector(resolver.styleSelector);
+  console.log("styleNode", styleNode);
+  const styleClasses = styleNode?.className;
+
   if (setNumber) {
+      if (!resolver.dynamic) {
+          addPriceToTargets(resolver, "...", "", styleClasses);
+      }
       fetch(`https://www.brickmerge.de/_app.php?find=${setNumber}&json_token=zNrPtJiFeOoOLpDjAMctsNzOrvi8KipF`)
       .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
       .then(({ offers, error, url }) => {
@@ -109,20 +166,8 @@
           if (!offers && !error) {
               return;
           }
-          const targets = document.querySelectorAll(resolver.targetSelector)
-          if (error) {
-              for (let element of targets) {
-                  renderError(element, error);
-              }
-          } else {
-              const lowestPrice = Number(offers?.lowPrice).toLocaleString("de-DE", {style: "currency", currency: offers?.priceCurrency || "EUR" });
-              if (lowestPrice) {
-                  for (let element of targets) {
-                      //console.log("target:", element.innerHTML);
-                      addLowestPrice(element, url, lowestPrice);
-                  }
-              }
-          }
+          const lowestPrice = Number(offers?.lowPrice).toLocaleString("de-DE", {style: "currency", currency: offers?.priceCurrency || "EUR" });
+          addPriceToTargets(resolver, error || lowestPrice, url, styleClasses);
       });
   }
 })();

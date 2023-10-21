@@ -12,6 +12,8 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 * steinehelden.de
 * proshop.de
 * alternate.de
+* saturn.de
+* mediamarkt.de
 ## Neuen Shop vorschlagen
 
 Dazu einfach diese [Eingabemaske](https://github.com/pke/brickmerge-userscript/issues/new?template=new-site.yml) ausfüllen.
@@ -19,19 +21,29 @@ Oder selber einen PR erstellen ;)
 
 ## Und so sieht es aus
 
-### amazon.de
+### alternate
+
+![alternate](https://github.com/pke/brickmerge-userscript/blob/master/images/alternate.png?raw=true)
+
+### amazon
 
 ![amazon.de](https://github.com/pke/brickmerge-userscript/blob/master/images/amazon.png?raw=true)
+
+### MediaMarkt
+
+![MediaMarkt](https://github.com/pke/brickmerge-userscript/blob/master/images/mediamarkt.png?raw=true)
 
 ### MyToys
 
 ![mytoys.de](https://github.com/pke/brickmerge-userscript/blob/master/images/mytoys.png?raw=true)
 
+### Saturn
+
+![saturn](https://github.com/pke/brickmerge-userscript/blob/master/images/saturn.png?raw=true)
+
 ### Smythstoys
 
-### toys-for-fun
-
-![toys-for-fun](https://github.com/pke/brickmerge-userscript/blob/master/images/smythstoys.png?raw=true)
+![Smythstoys](https://github.com/pke/brickmerge-userscript/blob/master/images/smythstoys.png?raw=true)
 
 ### toys-for-fun
 
