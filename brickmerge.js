@@ -12,6 +12,7 @@
 // @match          https://www.jb-spielwaren.de/*
 // @match          https://www.mediamarkt.de/de/product/_lego-*
 // @match          https://www.mytoys.de/lego-*
+// @match          https://www.otto.de/p/lego-*
 // @match          https://www.toys-for-fun.com/de/lego*
 // @match          https://www.proshop.de/LEGO/*
 // @match          https://steinehelden.de/*
@@ -79,6 +80,12 @@
         testURL: "https://www.saturn.de/de/product/_lego-10281-bonsai-baum-2672008.html",
       },
       "www.mediamarkt.de": "www.saturn.de", // just an alias, same as saturn
+      "www.otto.de": {
+        articleSelector: "head > title",
+        targetSelector: ".pdp_price__inner",
+        prepend: true,
+        testURL: "https://www.otto.de/p/lego-konstruktionsspielsteine-kamera-hommage-an-walt-disney-43230-lego-disney-811-st-made-in-europe-C1725197870/#variationId=1725014125",
+      },
   };
 
   function renderError(element, error, operation = "append") {

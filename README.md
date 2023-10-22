@@ -14,6 +14,7 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 * alternate.de
 * saturn.de
 * mediamarkt.de
+* otto.de
 ## Neuen Shop vorschlagen
 
 Dazu einfach diese [Eingabemaske](https://github.com/pke/brickmerge-userscript/issues/new?template=new-site.yml) ausfüllen.
