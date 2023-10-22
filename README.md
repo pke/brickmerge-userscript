@@ -16,6 +16,7 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 * mediamarkt.de
 * otto.de
 * mueller.de
+* thalia.de
 
 ## Neuen Shop vorschlagen
 
@@ -54,6 +55,10 @@ Oder selber einen PR erstellen ;)
 ### Mueller
 
 ![mueller](https://github.com/pke/brickmerge-userscript/blob/master/images/mueller.png?raw=true)
+
+### Thaloa
+
+![thalia](https://github.com/pke/brickmerge-userscript/blob/master/images/thalia.png?raw=true)
 
 ## License
 

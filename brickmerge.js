@@ -19,6 +19,7 @@
 // @match          https://steinehelden.de/*
 // @match          https://www.saturn.de/de/product/_lego-*
 // @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
+// @match          https://www.thalia.de/shop/home/artikeldetails/*
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
@@ -87,6 +88,13 @@
       "www.mueller.de": {
         targetSelector: ".mu-product-price.mu-product-details-page__price",
         testURL: "https://www.mueller.de/p/lego-icons-10281-bonsai-baum-kunstpflanzen-set-fuer-erwachsene-deko-2681620/",
+      },
+      "www.thalia.de": {
+        targetSelector: "artikel-informationen",
+        style(element) {
+            element.classList.add("element-text-small");
+        },
+        testURL: "https://www.thalia.de/shop/home/artikeldetails/A1068002914",
       },
   };
 
