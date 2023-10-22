@@ -15,6 +15,8 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 * saturn.de
 * mediamarkt.de
 * otto.de
+* mueller.de
+
 ## Neuen Shop vorschlagen
 
 Dazu einfach diese [Eingabemaske](https://github.com/pke/brickmerge-userscript/issues/new?template=new-site.yml) ausfüllen.
@@ -49,6 +51,10 @@ Oder selber einen PR erstellen ;)
 ### toys-for-fun
 
 ![toys-for-fun](https://github.com/pke/brickmerge-userscript/blob/master/images/toys-for-fun.png?raw=true)
+### Mueller
+
+![mueller](https://github.com/pke/brickmerge-userscript/blob/master/images/mueller.png?raw=true)
+
 ## License
 
 MIT
