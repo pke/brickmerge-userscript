@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    [
+      "@semantic-release/exec",
+      {
+        "prepareCmd": "./set-version.sh ${nextRelease.version}"
+      }
+    ]
+  ]
+}
