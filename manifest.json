@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "brickmerge® extension",
+  "description": "Displays lowest brickmerge® price next to offer price",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "js": ["brickmerge.js"],
+      "matches": [
+        "https://www.mytoys.de/lego-*"
+      ]
+    }
+  ]
+}
