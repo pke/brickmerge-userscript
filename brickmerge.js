@@ -49,7 +49,7 @@
       },
       "www.jb-spielwaren.de": {
           articleSelector: "h1",
-          targetSelector: ".crossprice",
+          targetSelector: ".widget-availability",
           testURL: "https://www.jb-spielwaren.de/lego-10293-besuch-des-weihnachtsmanns/a-10293/",
       },
       "steinehelden.de": {
