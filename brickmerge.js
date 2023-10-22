@@ -64,12 +64,10 @@
           testURL: "https://www.proshop.de/LEGO/LEGO-Ideas-21343-Wikingerdorf/3195765",
       },
       "www.alternate.de": {
-        articleSelector: "head > title",
         targetSelector: "#product-top-right .vat-and-shipping-costs",
         testURL: "https://www.alternate.de/LEGO/10311-Creator-Expert-Orchidee-Konstruktionsspielzeug/html/product/1818749",
       },
       "www.saturn.de": {
-        articleSelector: "head > title",
         targetSelector: "div[data-test='mms-pdp-offer-selection']",
         prepend: true,
         dynamic: true, // Site changes its DOM via script and could remove our element
@@ -82,13 +80,11 @@
       },
       "www.mediamarkt.de": "www.saturn.de", // just an alias, same as saturn
       "www.otto.de": {
-        articleSelector: "head > title",
         targetSelector: ".pdp_price__inner",
         prepend: true,
         testURL: "https://www.otto.de/p/lego-konstruktionsspielsteine-kamera-hommage-an-walt-disney-43230-lego-disney-811-st-made-in-europe-C1725197870/#variationId=1725014125",
       },
       "www.mueller.de": {
-        articleSelector: "head > title",
         targetSelector: ".mu-product-price.mu-product-details-page__price",
         testURL: "https://www.mueller.de/p/lego-icons-10281-bonsai-baum-kunstpflanzen-set-fuer-erwachsene-deko-2681620/",
       },
@@ -159,7 +155,7 @@
   }
 
   // Fetch the LEGO set number from the title
-  const title = document.querySelector(resolver.articleSelector)?.textContent;
+  const title = resolver.articleSelector && document.querySelector(resolver.articleSelector)?.textContent || document.title;
   //console.log("title: ", title);
   const [, setNumber] = /(\d+)/.exec(title) || [];
   //console.log("set number: ", setNumber);
