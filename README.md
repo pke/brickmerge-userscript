@@ -2,6 +2,8 @@
 
 GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LEGO® Produktseiten hinzufügt.
 
+<a href="https://greasyfork.org/de/scripts/477807-brickmerge-prices" style="">Jetzt installieren</a>
+
 ## Unterstützte Online Shops
 
 * amazon.de
