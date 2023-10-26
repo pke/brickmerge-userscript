@@ -9,6 +9,9 @@
 // @author         Philipp Kursawe <pke@pke.fyi>
 // @match          https://www.alternate.de/LEGO/*
 // @match          https://www.amazon.de/LEGO-*
+// @match          https://www.amazon.de/*LEGO*
+// @match          https://www.amazon.de/dp/*
+// @match          https://www.amazon.de/*/dp/*
 // @match          https://www.jb-spielwaren.de/*
 // @match          https://www.mediamarkt.de/de/product/_lego-*
 // @match          https://www.mueller.de/p/lego-*
