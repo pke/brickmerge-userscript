@@ -2,7 +2,11 @@
 
 GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LEGO® Produktseiten hinzufügt.
 
-<a href="https://greasyfork.org/de/scripts/477807-brickmerge-prices" style="">Jetzt installieren</a>
+<a href="https://greasyfork.org/de/scripts/477807-brickmerge-prices" style="padding: 1em; background: #005200;color: white">Jetzt installieren</a>
+
+## uMatrix oder uBlock (origin)
+
+Wenn ein Script-Blocker wie uMatrix oder uBlock benutzt wird (immer eine gute Idee!), dann muss die Domain `brickmerge-userscript.hypermedia.rocks` dort freigegeben werden, um den Bestpreis anzeigen zu können.
 
 ## Unterstützte Online Shops
 
