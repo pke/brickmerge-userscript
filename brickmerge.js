@@ -41,10 +41,10 @@
        .brickmerge-price a {
          color: #fff !important;
          font-weight: bold !important;
-         text-decoration: none !important;
+         text-decoration: underline !important;
        }
        .brickmerge-price a:hover {
-         text-decoration: underline !important;
+         text-decoration: none !important;
        }
        .brickmerge-price img {
          height: 16px;
