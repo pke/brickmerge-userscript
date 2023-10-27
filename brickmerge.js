@@ -30,7 +30,7 @@
 
 (function() {
     'use strict';
-  
+
      const style = `
        .brickmerge-price {
          background-color: #b00 !important;
@@ -58,7 +58,7 @@
        }
        `;
     const logo = `https://brickmerge-userscript.hypermedia.rocks/images/brickmerge.svg`;
-  
+
     const resolvers = {
         "www.amazon.de": {
             targetSelector: "#corePriceDisplay_desktop_feature_div,#corePrice_feature_div",
