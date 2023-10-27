@@ -61,37 +61,31 @@
   
     const resolvers = {
         "www.amazon.de": {
-            articleSelector: "#productTitle",
             targetSelector: "#corePriceDisplay_desktop_feature_div,#corePrice_feature_div",
             testURL: "https://www.amazon.de/LEGO-43230-Disney-Kamera-Maus-Minifiguren/dp/B0BV7BMPVS",
         },
         "www.mytoys.de": {
-            articleSelector: ".prod-info__name",
             targetSelector: ".prod-info__price-container",
             testURL: "https://www.mytoys.de/lego-lego-disney-43230-kamera--hommage-an-walt-disney-29981540.html",
         },
         "www.smythstoys.com": {
-            articleSelector: "h1[itemprop=name]",
             targetSelector: "#product-info div[itemprop=price]",
             testURL: "https://www.smythstoys.com/de/de-de/spielzeug/lego/lego-fuer-erwachsene/lego-icons-set-10266-nasa-apollo-11-mondlandefaehre/p/183613",
         },
         "www.toys-for-fun.com": {
-            articleSelector: "h1.page-title span[itemprop=name]",
             targetSelector: ".product-info-price",
             testURL: "https://www.toys-for-fun.com/de/legor-disney-43230-kamera-hommage-an-walt-disney.html",
         },
         "www.jb-spielwaren.de": {
-            articleSelector: "h1",
             targetSelector: ".widget-availability",
             testURL: "https://www.jb-spielwaren.de/lego-10293-besuch-des-weihnachtsmanns/a-10293/",
         },
         "steinehelden.de": {
-            articleSelector: "h1[itemprop=name]",
+            articleExtractor: /(\d+)/,
             targetSelector: "div[itemprop=offers] .product--tax",
             testURL: "https://steinehelden.de/city-arktis-schneemobil-60376/",
         },
         "www.proshop.de": {
-            articleSelector: "h1[data-type=product]",
             targetSelector: "#site-product-price-stock-buy-container span.site-currency-wrapper",
             testURL: "https://www.proshop.de/LEGO/LEGO-Ideas-21343-Wikingerdorf/3195765",
         },
@@ -127,7 +121,7 @@
           testURL: "https://www.thalia.de/shop/home/artikeldetails/A1068002914",
         },
     };
-  
+
     function renderError(element, error, operation = "append") {
         if (!element) {
             return;
@@ -136,7 +130,7 @@
         errorElement.innerText = error.message;
         element[operation]?.(errorElement);
     }
-  
+
     function addLowestPrice(element, title = "Bestpreis wird geladen", url, lowestPrice, operation = "append", icon, iconClass = []) {
         if (!element) {
             return;
@@ -156,7 +150,7 @@
         }
         return brickmergeBox;
     }
-  
+
     function addPriceToTargets(resolver, priceOrError, url, styleClasses, title, icon, iconClass) {
         const targets = document.querySelectorAll(resolver.targetSelector);
         if (targets.length === 0) {
@@ -190,7 +184,7 @@
             }
         }
     }
-  
+
     let resolver = resolvers[document.location.host]
     // Do we have an alias for another resolver?
     if (typeof resolver === "string") {
@@ -199,17 +193,16 @@
     if (!resolver) {
         return;
     }
-  
+
     // Fetch the LEGO set number from the title
-    const title = resolver.articleSelector && document.querySelector(resolver.articleSelector)?.textContent || document.title;
-    //console.log("title: ", title);
-    const [, setNumber] = /(\d+)/.exec(title) || [];
+    //console.log("title: ", document.title);
+    const [, setNumber] = (resolver.articleExtractor || /LEGO.*?(\d+)/i).exec(document.title) || [];
     //console.log("set number: ", setNumber);
-  
+
     const styleNode = document.querySelector(resolver.styleSelector);
     // console.log("styleNode", styleNode);
     const styleClasses = styleNode?.className;
-  
+
     if (setNumber) {
         if (!resolver.dynamic) {
             addPriceToTargets(resolver, "...", "", styleClasses);
