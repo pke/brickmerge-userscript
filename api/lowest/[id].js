@@ -8,7 +8,7 @@ function fetchSmytstoysPrice(id) {
       "x-algolia-application-id": "UATH9OAHYF",
       "x-algolia-api-key": "5913bdd0fed49d7c87acd04998565993",
       "Referer": "https://www.smythstoys.com",
-    },    
+    },
     body: `{"requests":[{"indexName": "prod_PRODUCTS_DE_de","query": "LEGO ${id}","params": "hitsPerPage=1"}]}`,
    })
   .then(result => result.json())
@@ -17,6 +17,16 @@ function fetchSmytstoysPrice(id) {
   .then(result => { console.log("Result", result); return result})
   .then(result => result[0])
   .then(result => { console.log("Result", result); return result})
+  .then(result => {
+    const { productName } = result
+    // Get set number from productName and compare to searched id
+    const foundSetNumber = /LEGO.*?(\d+)/i.exec(productName)?.[0]
+    if (foundSetNumber == id) {
+      return result
+    } else {
+      throw new Error(`LEGO set with ${id} not found.`)
+    }
+  })
   .then(({ url, priceValue, currency }) => ({
     title: "Smythstoys Bestpreis",
     icon: "https://image.smythstoys.com/images/ico/de/favicon.ico",
@@ -48,7 +58,7 @@ function createResponse({ title, href, price, currency = "EUR", icon, iconType =
 
 export default function lowestPrice(req, res) {
   const { id } = req.query;
-  
+
   Promise.allSettled([
     fetchBrickmergePrice(id),
     fetchSmytstoysPrice(id),
@@ -72,7 +82,7 @@ export default function lowestPrice(req, res) {
 
 function fetchBrickmergePrice(id) {
   const url = `https://www.brickmerge.de/_app.php?find=${id}&json_token=${process.env.API_KEY}`
-  
+
   return fetch(url)
       .then(res => res.status && res.ok && res, () => {
         res.statusCode = 404;
