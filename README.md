@@ -68,6 +68,8 @@ Oder selber einen PR erstellen ;)
 
 ![thalia](https://github.com/pke/brickmerge-userscript/blob/master/images/thalia.png?raw=true)
 
+<img src="./public/images/brickmerge.svg" style="background:#b00;height:32px;padding: 0.3rem"/>
+
 ## License
 
 MIT
