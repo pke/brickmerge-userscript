@@ -8,6 +8,7 @@
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
 // @author         Philipp Kursawe <pke@pke.fyi>
 // @match          https://www.alternate.de/LEGO/*
+// @match          https://www.alza.de/spielzeug/lego-*
 // @match          https://www.amazon.de/LEGO-*
 // @match          https://www.amazon.de/*LEGO*
 // @match          https://www.amazon.de/dp/*
@@ -127,7 +128,13 @@
           style: "text-align: center",
           targetSelector: ".x-bin-price",
           testURL: "https://www.ebay.de/itm/204515604952",
-      }
+      },
+      "www.alza.de": {
+          parent: true,
+          prepend: true,
+          targetSelector: ".price-detail__row",
+          testURL: "https://www.alza.de/spielzeug/lego-disney-43230-kamera-hommage-an-walt-disney-d7744520.htm",
+      },
   };
 
   function renderError(element, error, operation = "append") {
