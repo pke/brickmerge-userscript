@@ -23,6 +23,7 @@ Wenn ein Script-Blocker wie uMatrix oder uBlock benutzt wird (immer eine gute Id
 * otto.de
 * mueller.de
 * thalia.de
+* ebay.de
 
 ## Neuen Shop vorschlagen
 
