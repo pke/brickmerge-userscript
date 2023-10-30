@@ -1,5 +1,9 @@
 # brickmerge® Preise
 
+[![GitHub](https://img.shields.io/badge/source-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](.)
+![GitHub tag checks state](https://img.shields.io/github/checks-status/pke/brickmerge-userscript/master)
+![GitHub issues](https://img.shields.io/github/issues/pke/brickmerge-userscript)
+
 GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LEGO® Produktseiten hinzufügt.
 
 <a href="https://greasyfork.org/de/scripts/477807-brickmerge-prices" style="padding: 1em; background: #005200;color: white">Jetzt installieren</a>
