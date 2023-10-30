@@ -24,6 +24,7 @@ Wenn ein Script-Blocker wie uMatrix oder uBlock benutzt wird (immer eine gute Id
 * mueller.de
 * thalia.de
 * ebay.de
+* alza.de
 
 ## Neuen Shop vorschlagen
 
