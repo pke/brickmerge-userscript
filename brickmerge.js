@@ -15,6 +15,7 @@
 // @match          https://www.amazon.de/*/dp/*
 // @match          https://www.ebay.de/itm/*
 // @match          https://www.jb-spielwaren.de/*
+// @match          https://www.kleinanzeigen.de/s-anzeige/lego-*
 // @match          https://www.mediamarkt.de/de/product/_lego-*
 // @match          https://www.mueller.de/p/lego-*
 // @match          https://www.mytoys.de/lego-*
@@ -134,6 +135,11 @@
           prepend: true,
           targetSelector: ".price-detail__row",
           testURL: "https://www.alza.de/spielzeug/lego-disney-43230-kamera-hommage-an-walt-disney-d7744520.htm",
+      },
+      "www.kleinanzeigen.de": {
+          parent: true,
+          prepend: true,
+          targetSelector: "#viewad-title,.ad-keydetails--price-and-shipping",
       },
   };
 

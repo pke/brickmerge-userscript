@@ -1,6 +1,6 @@
 # brickmerge® Preise
 
-[![GitHub](https://img.shields.io/badge/source-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](.)
+[![GitHub](https://img.shields.io/badge/source-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/pke/brickmerge-userscript)
 ![GitHub tag checks state](https://img.shields.io/github/checks-status/pke/brickmerge-userscript/master)
 ![GitHub issues](https://img.shields.io/github/issues/pke/brickmerge-userscript)
 
@@ -11,6 +11,11 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 ## uMatrix oder uBlock (origin)
 
 Wenn ein Script-Blocker wie uMatrix oder uBlock benutzt wird (immer eine gute Idee!), dann muss die Domain `brickmerge-userscript.hypermedia.rocks` dort freigegeben werden, um den Bestpreis anzeigen zu können.
+Diese Regel kann dazu in uMatrix eingefügt werden:
+
+```
+* brickmerge-userscript.hypermedia.rocks xhr allow
+```
 
 ## Unterstützte Online Shops
 
@@ -29,6 +34,7 @@ Wenn ein Script-Blocker wie uMatrix oder uBlock benutzt wird (immer eine gute Id
 * thalia.de
 * ebay.de
 * alza.de
+* kleinanzeigen.de
 
 ## Neuen Shop vorschlagen
 
