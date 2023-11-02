@@ -22,7 +22,7 @@ function fetchBrickmergeBestPrice(id) {
       if (bestDate === "heute!") {
         return {
           title: `ALL-TIME-BESTPREIS`,
-          icon: "https://github.com/pke/brickmerge-userscript/blob/master/public/images/brickmerge.svg?raw=true",
+          icon: "https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg",
           iconType: "text/xml+svg",
           href: $("link[rel=canonical]").attr("href"),
           price: bestPrice.replace(",", "."),
@@ -157,7 +157,7 @@ function fetchBrickmergePrice(id) {
       .then(res => res.json())
       .then(({ offers, url }) => ({
         title: "Bestpreis",
-        icon: "https://github.com/pke/brickmerge-userscript/blob/master/public/images/brickmerge.svg?raw=true",
+        icon: "https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg",
         iconType: "image/svg+xml",
         href: url,
         price: offers?.lowPrice,

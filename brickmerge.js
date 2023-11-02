@@ -59,7 +59,7 @@
       width: 16px;
      }
      `;
-  const logo = `https://github.com/pke/brickmerge-userscript/blob/master/public/images/brickmerge.svg?raw=true`;
+  const logo = `https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg`;
 
   const resolvers = {
       "www.amazon.de": {
