@@ -39,7 +39,7 @@
        background-color: #b00 !important;
        color: #fff !important;
        margin: 1rem 0 !important;
-       padding: 0.3rem !important;
+       padding: 0.3rem 0.5rem !important;
      }
      .brickmerge-price a {
        color: #fff !important;
@@ -56,7 +56,7 @@
        margin-right: 0.3rem;
      }
      .brickmerge-price img.small {
-      width: 16px;
+       width: 16px;
      }
      `;
   const logo = `https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg`;
