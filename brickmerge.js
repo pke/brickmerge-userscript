@@ -222,7 +222,7 @@
 
   // Fetch the LEGO set number from the title
   //console.log("title: ", document.title);
-  const [, setNumber] = (resolver.articleExtractor || /LEGO.*?(\d+)/i).exec(document.title) || [];
+  const [, setNumber] = (resolver.articleExtractor || /LEGO.*?(\d{4,})/i).exec(document.title) || [];
   //console.log("set number: ", setNumber);
 
   const styleNode = document.querySelector(resolver.styleSelector);
