@@ -1,3 +1,40 @@
+import { load } from "cheerio"
+
+function fetchBrickmergeBestPrice(id) {
+  const href = `https://brickmerge.de/${id}`
+  return fetch(href, {
+    headers: {
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+    },
+   })
+  .then(result => result.text())
+  .then(load)
+  .then($ => {
+    const regex = /(\d+,\d+) €.* (\d+)%.*  (.*)/
+    const currency = "EUR"
+    const $priceLinks = $("a[href='#offerlist']")
+    const $bestPriceElement = $priceLinks.first()
+    const [, bestPrice, bestPercent, bestDate] = $bestPriceElement.text().match(regex)
+    // Get set number from productName and compare to searched id
+    const name = $("title").text()
+    const foundSetNumber = /LEGO.*?(\d+)/i.exec(name)?.[1]
+    if (foundSetNumber == id) {
+      if (bestDate === "heute!") {
+        return {
+          title: `ALL-TIME-BESTPREIS`,
+          href: $("link[rel=canonical]").attr("href"),
+          price: bestPrice.replace(",", "."),
+          currency,
+        }
+      } else {
+        throw new Error(`LEGO® set ${name} bestprice ${bestPrice} was ${bestDate}.`)
+      }
+    } else {
+      throw new Error(`LEGO® set with ${id} not found on smythstoys.`)
+    }
+  })
+}
+
 function fetchSmytstoysPrice(id) {
   const url = `https://uath9oahyf-dsn.algolia.net/1/indexes/*/queries`
   return fetch(url, {
@@ -61,6 +98,7 @@ export default function lowestPrice(req, res) {
 
   Promise.allSettled([
     fetchBrickmergePrice(id),
+    fetchBrickmergeBestPrice(id),
     fetchSmytstoysPrice(id),
   ]).then(results => {
     console.log(results)
@@ -68,7 +106,14 @@ export default function lowestPrice(req, res) {
     const [best] = results
       .filter(result => result.status === "fulfilled")
       .map(result => result.value)
-      .sort((a, b) => a.price - b.price)
+      .sort((a, b) => {
+        if (/BESTPREIS/.test(a.title)) {
+          return -1
+        } else if (/BESTPREIS/.test(b.title)) {
+          return 1
+        }
+        return a.price - b.price
+      })
     //console.log("best", best)
     if (best) {
       res.status(200);
