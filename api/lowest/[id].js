@@ -1,10 +1,11 @@
 import { load } from "cheerio"
+import UserAgent from "user-agents"
 
 function fetchBrickmergeBestPrice(id) {
   const href = `https://brickmerge.de/${id}`
   return fetch(href, {
     headers: {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+      "User-Agent": (new UserAgent()).toString(),
     },
    })
   .then(result => result.text())
@@ -42,7 +43,7 @@ function fetchSmytstoysPrice(id) {
   return fetch(url, {
     method: "POST",
     headers: {
-      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+      "User-Agent": (new UserAgent()).toString(),
       "Content-Type": "application/json",
       "x-algolia-application-id": "UATH9OAHYF",
       "x-algolia-api-key": "5913bdd0fed49d7c87acd04998565993",
