@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: "lts/*"
       - name: Install dependencies
-        run: npm i -g semantic-release @semantic-release/exec @semantic-release/git cheerio
+        run: npm i -g semantic-release @semantic-release/exec @semantic-release/git
       #- name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
       #  run: npm audit signatures
       - name: Release

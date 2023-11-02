@@ -51,16 +51,15 @@
      }
      .brickmerge-price img {
        height: 16px;
-       width: 16px;
        display: inline;
        vertical-align: middle;
        margin-right: 0.3rem;
      }
-     .brickmerge-price img.brickmerge {
-       width: initial;
+     .brickmerge-price img.small {
+      width: 16px;
      }
      `;
-  const logo = `https://brickmerge-userscript.hypermedia.rocks/images/brickmerge.svg`;
+  const logo = `https://github.com/pke/brickmerge-userscript/blob/master/public/images/brickmerge.svg?raw=true`;
 
   const resolvers = {
       "www.amazon.de": {
@@ -238,7 +237,7 @@
       .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
       .then(json => {
           const { title, links } = json;
-          const icon = links.find(link => link.rel == "icon") || logo;
+          const icon = links.find(link => link.rel == "icon") || { href: logo };
           const link = links.find(link => link.rel == "self");
           addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
       });
