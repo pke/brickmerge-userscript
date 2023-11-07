@@ -1,41 +1,14 @@
-import { load } from "cheerio"
 import UserAgent from "user-agents"
+import util from "util"
+const trace = util.debuglog("trace")
 
-function fetchBrickmergeBestPrice(id) {
-  const href = `https://brickmerge.de/${id}`
-  return fetch(href, {
-    headers: {
-      "User-Agent": (new UserAgent()).toString(),
-    },
-   })
-  .then(result => result.text())
-  .then(load)
-  .then($ => {
-    const regex = /(\d+,\d+) €.* (\d+)%.*  (.*)/
-    const currency = "EUR"
-    const $priceLinks = $("a[href='#offerlist']")
-    const $bestPriceElement = $priceLinks.first()
-    const [, bestPrice, bestPercent, bestDate] = $bestPriceElement.text().match(regex)
-    // Get set number from productName and compare to searched id
-    const name = $("title").text()
-    const foundSetNumber = /LEGO.*?(\d+)/i.exec(name)?.[1]
-    if (foundSetNumber == id) {
-      if (bestDate === "heute!") {
-        return {
-          title: `ALL-TIME-BESTPREIS`,
-          icon: "https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg",
-          iconType: "text/xml+svg",
-          href: $("link[rel=canonical]").attr("href"),
-          price: bestPrice.replace(",", "."),
-          currency,
-        }
-      } else {
-        throw new Error(`LEGO® set ${name} bestprice ${bestPrice} was ${bestDate}.`)
-      }
-    } else {
-      throw new Error(`LEGO® set with ${id} not found on smythstoys.`)
-    }
-  })
+function log(object) {
+  if (object instanceof Response) {
+    trace("%s %s [%d %s]", object.method, object.host, object.status, object.statusText)
+  } else {
+    trace(object)
+  }
+  return object
 }
 
 function fetchSmytstoysPrice(id) {
@@ -51,12 +24,10 @@ function fetchSmytstoysPrice(id) {
     },
     body: `{"requests":[{"indexName": "prod_PRODUCTS_DE_de","query": "LEGO ${id}","params": "hitsPerPage=1"}]}`,
    })
+  .then(log)
   .then(result => result.json())
-  //.then(json => { console.log("JSON: ", json); return json })
-  .then(({results}) => results?.[0].hits)
-  //.then(result => { console.log("Result", result); return result})
-  .then(result => result[0])
-  .then(result => { console.log("Result", result); return result})
+  .then(({results}) => results?.[0].hits?.[0])
+  .then(log)
   .then(result => {
     const { productName } = result
     // Get set number from productName and compare to searched id
@@ -102,22 +73,21 @@ export default function lowestPrice(req, res) {
 
   Promise.allSettled([
     fetchBrickmergePrice(id),
-    fetchBrickmergeBestPrice(id),
     fetchSmytstoysPrice(id),
-  ]).then(results => {
-    console.log(results)
-    console.log(res.statusCode)
+  ])
+  .then(log)
+  .then(results => {
+    const [brickMergeResult] = results
+    const brickMergeAllTimeBestprice = brickMergeResult.status === "fulfilled" && /BESTPREIS/.test(brickMergeResult.value?.title) && brickMergeResult.value?.price
     const [best] = results
       .filter(result => result.status === "fulfilled")
       .map(result => result.value)
-      .sort((a, b) => {
-        if (/BESTPREIS/.test(a.title)) {
-          return -1
-        } else if (/BESTPREIS/.test(b.title)) {
-          return 1
-        }
-        return a.price - b.price
-      })
+      .sort((a, b) => a.price - b.price)
+    // Fix shop prices that are not listed on BM (i.e. smythstoys)
+    // which can have an even better price than the recorded on BM
+    if (best?.price < brickMergeAllTimeBestprice) {
+      best.title = "ALL-TIME-BESTPREIS"
+    }
     //console.log("best", best)
     if (best) {
       res.status(200);
@@ -142,12 +112,11 @@ export default function lowestPrice(req, res) {
 
 function fetchBrickmergePrice(id) {
   const url = `https://www.brickmerge.de/_app.php?find=${id}&json_token=${process.env.API_KEY}`
-  console.log(url)
+  log(url)
 
   return fetch(url)
-      //.then(res => { console.log(res.headers); return res })
+      .then(log)
       .then(res => {
-        console.log(res.ok, res.status)
         if (res.ok && res.status === 200) {
           return res
         } else if (res.status === 404) {
@@ -156,12 +125,12 @@ function fetchBrickmergePrice(id) {
         throw new Error("brickmerge® nicht erreichbar")
       })
       .then(res => res.json())
-      .then(({ offers, url }) => ({
-        title: "Bestpreis",
+      .then(({ offers, url, additionalProperty }) => ({
+        title: (/All-Time/.test(additionalProperty?.name) && additionalProperty.value === "true") ? "ALL-TIME-BESTPREIS" : "Bestpreis",
         icon: "https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg",
         iconType: "image/svg+xml",
         href: url,
-        price: offers?.lowPrice,
+        price: Number(offers?.lowPrice),
         currency: offers?.priceCurrency,
       }));
 }
