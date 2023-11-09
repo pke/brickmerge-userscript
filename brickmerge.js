@@ -15,6 +15,7 @@
 // @match          https://www.amazon.de/dp/*
 // @match          https://www.amazon.de/*/dp/*
 // @match          https://www.bol.de/shop/home/artikeldetails/*
+// @match          https://www.digitalo.de/products/*/*-LEGO-*
 // @match          https://www.ebay.de/itm/*
 // @match          https://www.jb-spielwaren.de/*
 // @match          https://www.kleinanzeigen.de/s-anzeige/lego-*
@@ -36,31 +37,31 @@
 (function() {
     'use strict';
 
-     const style = `
-       .brickmerge-price {
-         background-color: #b00 !important;
-         color: #fff !important;
-         margin: 1rem 0 !important;
-         padding: 0.3rem 0.5rem !important;
-       }
-       .brickmerge-price a {
-         color: #fff !important;
-         font-weight: bold !important;
-         text-decoration: underline !important;
-       }
-       .brickmerge-price a:hover {
-         text-decoration: none !important;
-       }
-       .brickmerge-price img {
-         height: 16px;
-         display: inline;
-         vertical-align: middle;
-         margin-right: 0.3rem;
-       }
-       .brickmerge-price img.small {
-         width: 16px;
-       }
-       `;
+    const style = `
+     .brickmerge-price {
+       background-color: #b00 !important;
+       color: #fff !important;
+       margin: 1rem 0 !important;
+       padding: 0.3rem 0.5rem !important;
+     }
+     .brickmerge-price a {
+       color: #fff !important;
+       font-weight: bold !important;
+       text-decoration: underline !important;
+     }
+     .brickmerge-price a:hover {
+       text-decoration: none !important;
+     }
+     .brickmerge-price img {
+       height: 16px;
+       display: inline;
+       vertical-align: middle;
+       margin-right: 0.3rem;
+     }
+     .brickmerge-price img.small {
+       width: 16px;
+     }`;
+
     const logo = `https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg`;
 
     const resolvers = {
@@ -94,35 +95,35 @@
             testURL: "https://www.proshop.de/LEGO/LEGO-Ideas-21343-Wikingerdorf/3195765",
         },
         "www.alternate.de": {
-          targetSelector: "#product-top-right .vat-and-shipping-costs",
-          testURL: "https://www.alternate.de/LEGO/10311-Creator-Expert-Orchidee-Konstruktionsspielzeug/html/product/1818749",
+            targetSelector: "#product-top-right .vat-and-shipping-costs",
+            testURL: "https://www.alternate.de/LEGO/10311-Creator-Expert-Orchidee-Konstruktionsspielzeug/html/product/1818749",
         },
         "www.saturn.de": {
-          targetSelector: "div[data-test='mms-pdp-offer-selection']",
-          prepend: true,
-          dynamic: true, // Site changes its DOM via script and could remove our element
-          styleSelector: "div[data-test='mms-branded-price'] p > span",
-          style(element) {
-              element.style = "text-align: right";
-          },
-          testURL: "https://www.saturn.de/de/product/_lego-10281-bonsai-baum-2672008.html",
+            targetSelector: "div[data-test='mms-pdp-offer-selection']",
+            prepend: true,
+            dynamic: true, // Site changes its DOM via script and could remove our element
+            styleSelector: "div[data-test='mms-branded-price'] p > span",
+            style(element) {
+                element.style = "text-align: right";
+            },
+            testURL: "https://www.saturn.de/de/product/_lego-10281-bonsai-baum-2672008.html",
         },
         "www.mediamarkt.de": "www.saturn.de", // just an alias, same as saturn
         "www.otto.de": {
-          targetSelector: ".pdp_price__inner",
-          prepend: true,
-          testURL: "https://www.otto.de/p/lego-konstruktionsspielsteine-kamera-hommage-an-walt-disney-43230-lego-disney-811-st-made-in-europe-C1725197870/#variationId=1725014125",
+            targetSelector: ".pdp_price__inner",
+            prepend: true,
+            testURL: "https://www.otto.de/p/lego-konstruktionsspielsteine-kamera-hommage-an-walt-disney-43230-lego-disney-811-st-made-in-europe-C1725197870/#variationId=1725014125",
         },
         "www.mueller.de": {
-          targetSelector: ".mu-product-price.mu-product-details-page__price",
-          testURL: "https://www.mueller.de/p/lego-icons-10281-bonsai-baum-kunstpflanzen-set-fuer-erwachsene-deko-2681620/",
+            targetSelector: ".mu-product-price.mu-product-details-page__price",
+            testURL: "https://www.mueller.de/p/lego-icons-10281-bonsai-baum-kunstpflanzen-set-fuer-erwachsene-deko-2681620/",
         },
         "www.thalia.de": {
-          targetSelector: "artikel-informationen",
-          style(element) {
-              element.classList.add("element-text-small");
-          },
-          testURL: "https://www.thalia.de/shop/home/artikeldetails/A1068002914",
+            targetSelector: "artikel-informationen",
+            style(element) {
+                element.classList.add("element-text-small");
+            },
+            testURL: "https://www.thalia.de/shop/home/artikeldetails/A1068002914",
         },
         "www.bol.de": "www.thalia.de", // https://www.bol.de/shop/home/artikeldetails/A1066075411
         "www.ebay.de": {
@@ -143,6 +144,12 @@
             parent: true,
             prepend: true,
             targetSelector: "#viewad-title,.ad-keydetails--price-and-shipping",
+        },
+        "www.digitalo.de": {
+            parent: true,
+            prepend: true,
+            articleExtractor: /(\d{4,}) LEGO/,
+            targetSelector: ".large_order_5",
         },
     };
 
@@ -178,6 +185,7 @@
     function addPriceToTargets(resolver, priceOrError, url, styleClasses, title, icon, iconClass) {
         const targets = document.querySelectorAll(resolver.targetSelector);
         if (targets.length === 0) {
+            // console.log(`Target ${resolver.targetSelector} not found`);
             return;
         }
         if (!document.querySelector("head style.brickmerge")) {
@@ -238,12 +246,12 @@
             addPriceToTargets(resolver, "...", "", styleClasses);
         }
         fetch("https://brickmerge-userscript.hypermedia.rocks/lowest/" + setNumber)
-        .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
-        .then(json => {
+            .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
+            .then(json => {
             const { title, links } = json;
             const icon = links.find(link => link.rel == "icon") || { href: logo };
             const link = links.find(link => link.rel == "self");
             addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
         });
     }
-  })();
+})();
