@@ -9,6 +9,7 @@
 // @author         Philipp Kursawe <pke@pke.fyi>
 // @match          https://www.alternate.de/LEGO/*
 // @match          https://www.alza.de/spielzeug/lego-*
+// @match          https://www.alza.at/spielzeug/lego-*
 // @match          https://www.amazon.de/LEGO-*
 // @match          https://www.amazon.de/*LEGO*
 // @match          https://www.amazon.de/dp/*
@@ -137,6 +138,7 @@
             targetSelector: ".price-detail__row",
             testURL: "https://www.alza.de/spielzeug/lego-disney-43230-kamera-hommage-an-walt-disney-d7744520.htm",
         },
+        "www.alza.at": "www.alza.de",
         "www.kleinanzeigen.de": {
             parent: true,
             prepend: true,
