@@ -32,6 +32,9 @@
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
+// @grant          GM_xmlhttpRequest
+// @connect        hypermedia.rocks
+// @connect        *
 // ==/UserScript==
 
 (function() {
@@ -245,13 +248,16 @@
         if (!resolver.dynamic) {
             addPriceToTargets(resolver, "...", "", styleClasses);
         }
-        fetch("https://brickmerge-userscript.hypermedia.rocks/lowest/" + setNumber)
-            .then(res => res.json(), () => ({ error: "brickmerge® nicht erreichbar" }))
-            .then(json => {
+        GM_xmlhttpRequest({
+            method: "GET",
+            url: "https://brickmerge-userscript.hypermedia.rocks/lowest/" + setNumber,
+            onload(response) {
+              const json = JSON.parse(response.responseText);
             const { title, links } = json;
             const icon = links.find(link => link.rel == "icon") || { href: logo };
             const link = links.find(link => link.rel == "self");
             addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
+            }
         });
     }
 })();
