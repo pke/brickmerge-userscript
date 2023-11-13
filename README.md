@@ -35,6 +35,7 @@ Diese Regel kann dazu in uMatrix eingefügt werden:
 * ebay.de
 * alza.de
 * kleinanzeigen.de
+* galeria.de
 
 ## Neuen Shop vorschlagen
 

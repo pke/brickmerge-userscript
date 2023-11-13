@@ -17,6 +17,7 @@
 // @match          https://www.bol.de/shop/home/artikeldetails/*
 // @match          https://www.digitalo.de/products/*/*-LEGO-*
 // @match          https://www.ebay.de/itm/*
+// @match          https://www.galeria.de/produkt/lego-*
 // @match          https://www.jb-spielwaren.de/*
 // @match          https://www.kleinanzeigen.de/s-anzeige/lego-*
 // @match          https://www.mediamarkt.de/de/product/_lego-*
@@ -154,6 +155,9 @@
             articleExtractor: /(\d{4,}) LEGO/,
             targetSelector: ".large_order_5",
         },
+        "www.galeria.de": {
+            targetSelector: "div[data-testid=productDetails] h1",
+        },
     };
 
     function renderError(element, error, operation = "append") {
@@ -253,10 +257,10 @@
             url: "https://brickmerge-userscript.hypermedia.rocks/lowest/" + setNumber,
             onload(response) {
               const json = JSON.parse(response.responseText);
-            const { title, links } = json;
-            const icon = links.find(link => link.rel == "icon") || { href: logo };
-            const link = links.find(link => link.rel == "self");
-            addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
+              const { title, links } = json;
+              const icon = links.find(link => link.rel == "icon") || { href: logo };
+              const link = links.find(link => link.rel == "self");
+              addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
             }
         });
     }
