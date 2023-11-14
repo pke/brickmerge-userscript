@@ -55,7 +55,7 @@ function createResponse({ title, href, price, currency = "EUR", icon, iconType =
     links: [
       {
         rel: "self",
-        title: Number(price).toLocaleString("de-DE", {style: "currency", currency }),
+        title: isNaN(price) ? "unbekannt" : Number(price).toLocaleString("de-DE", {style: "currency", currency }),
         href
       },
       icon && {
