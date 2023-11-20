@@ -20,6 +20,7 @@
 // @match          https://www.galeria.de/produkt/lego-*
 // @match          https://www.jb-spielwaren.de/*
 // @match          https://www.kleinanzeigen.de/s-anzeige/lego-*
+// @match          https://www.lego.com/de-de/product/*
 // @match          https://www.mediamarkt.de/de/product/_lego-*
 // @match          https://www.mueller.de/p/lego-*
 // @match          https://www.mytoys.de/lego-*
@@ -161,6 +162,12 @@
         },
         "www.shopdisney.de": {
             targetSelector: "div.prices",
+        },
+        "www.lego.com": {
+            articleExtractor: /(\d+)/,
+            parent: true,
+            dynamic: true,
+            targetSelector: "div[class^='ProductOverviewstyles__PriceAvailabilityWrapper-'] span[data-test='product-price']",
         },
     };
 
