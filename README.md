@@ -19,23 +19,27 @@ Diese Regel kann dazu in uMatrix eingefügt werden:
 
 ## Unterstützte Online Shops
 
-* amazon.de
-* mytoys.de
-* smythstoys.com
-* toys-for-fun.com
-* jb-spielwaren.de
-* steinehelden.de
-* proshop.de
 * alternate.de
-* saturn.de
-* mediamarkt.de
-* otto.de
-* mueller.de
-* thalia.de
-* ebay.de
 * alza.de
-* kleinanzeigen.de
+* amazon.de
+* bol.de
+* digitalo.de
+* ebay.de
 * galeria.de
+* jb-spielwaren.de
+* kleinanzeigen.de
+* lego.com
+* mediamarkt.de
+* mueller.de
+* mytoys.de
+* otto.de
+* proshop.de
+* saturn.de
+* shopdisney.de
+* smythstoys.com
+* steinehelden.de
+* thalia.de
+* toys-for-fun.com
 
 ## Neuen Shop vorschlagen
 

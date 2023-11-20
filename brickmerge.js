@@ -25,13 +25,13 @@
 // @match          https://www.mueller.de/p/lego-*
 // @match          https://www.mytoys.de/lego-*
 // @match          https://www.otto.de/p/lego-*
-// @match          https://www.toys-for-fun.com/de/lego*
 // @match          https://www.proshop.de/LEGO/*
 // @match          https://www.shopdisney.de/lego-*
-// @match          https://steinehelden.de/*
 // @match          https://www.saturn.de/de/product/_lego-*
 // @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
+// @match          https://steinehelden.de/*
 // @match          https://www.thalia.de/shop/home/artikeldetails/*
+// @match          https://www.toys-for-fun.com/de/lego*
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
