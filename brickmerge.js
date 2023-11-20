@@ -26,6 +26,7 @@
 // @match          https://www.otto.de/p/lego-*
 // @match          https://www.toys-for-fun.com/de/lego*
 // @match          https://www.proshop.de/LEGO/*
+// @match          https://www.shopdisney.de/lego-*
 // @match          https://steinehelden.de/*
 // @match          https://www.saturn.de/de/product/_lego-*
 // @match          https://www.smythstoys.com/de/de-de/spielzeug/lego/*
@@ -157,6 +158,9 @@
         },
         "www.galeria.de": {
             targetSelector: "div[data-testid=productDetails] h1",
+        },
+        "www.shopdisney.de": {
+            targetSelector: "div.prices",
         },
     };
 
