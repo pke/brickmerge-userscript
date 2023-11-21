@@ -8,6 +8,8 @@ GreaseMonkey UserScript welches den Bestpreis von brickmerge® zu Online Shop LE
 
 <a href="https://greasyfork.org/de/scripts/477807-brickmerge-prices" style="padding: 1em; background: #005200;color: white">Jetzt installieren</a>
 
+oder von https://openuserjs.org/scripts/pke/brickmerge%C2%AE_Prices
+
 ## uMatrix oder uBlock (origin)
 
 Wenn ein Script-Blocker wie uMatrix oder uBlock benutzt wird (immer eine gute Idee!), dann muss die Domain `brickmerge-userscript.hypermedia.rocks` dort freigegeben werden, um den Bestpreis anzeigen zu können.
