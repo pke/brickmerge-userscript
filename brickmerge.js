@@ -107,7 +107,7 @@
         "www.saturn.de": {
             targetSelector: "div[data-test='mms-pdp-offer-selection']",
             prepend: true,
-            dynamic: true, // Site changes its DOM via script and could remove our element
+            dynamic: "h1", // Site changes its DOM via script and could remove our element
             styleSelector: "div[data-test='mms-branded-price'] p > span",
             style(element) {
                 element.style = "text-align: right";
@@ -259,10 +259,7 @@
     // console.log("styleNode", styleNode);
     const styleClasses = styleNode?.className;
 
-    if (setNumber) {
-        if (!resolver.dynamic) {
-            addPriceToTargets(resolver, "...", "", styleClasses);
-        }
+    function fetchPrice() {
         GM_xmlhttpRequest({
             method: "GET",
             url: "https://brickmerge-userscript.hypermedia.rocks/lowest/" + setNumber,
@@ -275,4 +272,29 @@
             }
         });
     }
+
+    if (!setNumber) {
+        return;
+    }
+    addPriceToTargets(resolver, "...", "", styleClasses);
+    /*if (resolver.dynamic) {
+        // Create an observer instance linked to the callback function
+        const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+                if (mutation.type === "characterData") {
+                    if (mutation.target.querySelector?.(resolver.targetSelector)) {
+                        fetchPrice();
+                    }
+                } else if (mutation.type === "childList" && mutation.addedNodes?.length) {
+                    for (const addedNode of mutation.addedNodes) {
+                        if (addedNode.querySelector?.(resolver.targetSelector)) {
+                            fetchPrice();
+                        }
+                    }
+                }
+            }
+        });
+        observer.observe(document.body, { characterData: true, childList: true, subtree: true });
+    }*/
+    fetchPrice();
 })();
