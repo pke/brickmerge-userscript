@@ -44,6 +44,7 @@
 
 (function() {
     'use strict';
+    'use esversion:11';
 
     const style = `
      .brickmerge-price {
