@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name           brickmerge® Prices
-// @name:de        brickmerge® Preise
+// @name           brickmerge® Preise
+// @name:en        brickmerge® Prices
 // @namespace      https://brickmerge.de/
 // @version        1.24.0
 // @license        MIT
-// @description    Displays lowest brickmerge® price next to offer price
-// @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
+// @description    Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
+// @description:en Displays lowest brickmerge® price next to offer price
 // @author         Philipp Kursawe <pke@pke.fyi>
 // @match          https://www.alternate.de/LEGO/*
 // @match          https://www.alza.de/spielzeug/lego-*
