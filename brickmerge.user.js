@@ -35,6 +35,8 @@
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
+// @downloadURL    https://raw.githubusercontent.com/pke/brickmerge-userscript/master/brickmerge.user.js
+// @run-at         document-end
 // @grant          GM_xmlhttpRequest
 // @connect        hypermedia.rocks
 // @connect        *
