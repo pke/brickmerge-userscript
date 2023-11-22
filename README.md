@@ -54,9 +54,25 @@ Oder selber einen PR erstellen ;)
 
 ![alternate](https://github.com/pke/brickmerge-userscript/blob/master/images/alternate.png?raw=true)
 
+### alza
+
+![alza](https://github.com/pke/brickmerge-userscript/blob/master/images/alza.png?raw=true)
+
 ### amazon
 
 ![amazon.de](https://github.com/pke/brickmerge-userscript/blob/master/images/amazon.png?raw=true)
+
+### disney
+
+![disney](https://github.com/pke/brickmerge-userscript/blob/master/images/disney.png?raw=true)
+
+### ebay
+
+![ebay.de](https://github.com/pke/brickmerge-userscript/blob/master/images/ebay.png?raw=true)
+
+### lego
+
+![lego](https://github.com/pke/brickmerge-userscript/blob/master/images/lego.png?raw=true)
 
 ### MediaMarkt
 
