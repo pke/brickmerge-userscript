@@ -21,27 +21,30 @@ Diese Regel kann dazu in uMatrix eingefügt werden:
 
 ## Unterstützte Online Shops
 
-* alternate.de
-* alza.de
-* amazon.de
-* bol.de
-* digitalo.de
-* ebay.de
-* galeria.de
-* jb-spielwaren.de
-* kleinanzeigen.de
-* lego.com
-* mediamarkt.de
-* mueller.de
-* mytoys.de
-* otto.de
-* proshop.de
-* saturn.de
-* shopdisney.de
-* smythstoys.com
-* steinehelden.de
-* thalia.de
-* toys-for-fun.com
+* ![alternate.de Logo](https://www.google.com/s2/favicons?sz=16&domain=alternate.de) [alternate.de](https://alternate.de)
+* ![alza.de Logo](https://www.google.com/s2/favicons?sz=16&domain=alza.de) [alza.de](https://alza.de)
+* ![alza.at Logo](https://www.google.com/s2/favicons?sz=16&domain=alza.at) [alza.at](https://alza.at)
+* ![amazon.de Logo](https://www.google.com/s2/favicons?sz=16&domain=amazon.de) [amazon.de](https://amazon.de)
+* ![amazon.es Logo](https://www.google.com/s2/favicons?sz=16&domain=amazon.es) [amazon.es](https://amazon.es)
+* ![amazon.fr Logo](https://www.google.com/s2/favicons?sz=16&domain=amazon.fr) [amazon.fr](https://amazon.fr)
+* ![bol.de Logo](https://www.google.com/s2/favicons?sz=16&domain=bol.de) [bol.de](https://bol.de)
+* ![digitalo.de Logo](https://www.google.com/s2/favicons?sz=16&domain=digitalo.de) digitalo.de
+* ![ebay.de Logo](https://www.google.com/s2/favicons?sz=16&domain=ebay.de) ebay.de
+* ![galeria.de Logo](https://www.google.com/s2/favicons?sz=16&domain=galeria.de) galeria.de
+* ![jb-spielwaren.de Logo](https://www.google.com/s2/favicons?sz=16&domain=jb-spielwaren.de) jb-spielwaren.de
+* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=kleinanzeigen.de) kleinanzeigen.de
+* ![lego.com Logo](https://www.google.com/s2/favicons?sz=16&domain=lego.com) lego.com
+* ![mediamarkt.de Logo](https://www.google.com/s2/favicons?sz=16&domain=mediamarkt.de) mediamarkt.de
+* ![mueller.de Logo](https://www.google.com/s2/favicons?sz=16&domain=mueller.de) mueller.de
+* ![mytoys.de Logo](https://www.google.com/s2/favicons?sz=16&domain=mytoys.de) mytoys.de
+* ![otto.de Logo](https://www.google.com/s2/favicons?sz=16&domain=otto.de) otto.de
+* ![proshop.de Logo](https://www.google.com/s2/favicons?sz=16&domain=proshop.de) proshop.de
+* ![saturn.de Logo](https://www.google.com/s2/favicons?sz=16&domain=saturn.de) saturn.de
+* ![shopdisney.de Logo](https://www.google.com/s2/favicons?sz=16&domain=shopdisney.de) shopdisney.de
+* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=smythstoys.de) smythstoys.de
+* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=steinehelden.de) steinehelden.de
+* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=thalia.de) thalia.de
+* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=toys-for-fun.com) toys-for-fun.com
 
 ## Neuen Shop vorschlagen
 
