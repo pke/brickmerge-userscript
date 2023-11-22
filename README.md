@@ -59,11 +59,11 @@ Oder selber einen PR erstellen ;)
 
 ### alza
 
-![alza](https://github.com/pke/brickmerge-userscript/blob/master/images/alza.png?raw=true)
+![alza](https://github.com/pke/brickmerge-userscript/blob/master/images/www.alza.de.png?raw=true)
 
-### amazon
+### amazon.de
 
-![amazon.de](https://github.com/pke/brickmerge-userscript/blob/master/images/amazon.png?raw=true)
+![amazon.de](https://github.com/pke/brickmerge-userscript/blob/master/images/www.amazon.de.png?raw=true)
 
 ### disney
 
@@ -95,14 +95,14 @@ Oder selber einen PR erstellen ;)
 
 ### toys-for-fun
 
-![toys-for-fun](https://github.com/pke/brickmerge-userscript/blob/master/images/toys-for-fun.png?raw=true)
+![toys-for-fun](https://github.com/pke/brickmerge-userscript/blob/master/images/www.toys-for-fun.de.png?raw=true)
 ### Mueller
 
 ![mueller](https://github.com/pke/brickmerge-userscript/blob/master/images/mueller.png?raw=true)
 
-### Thaloa
+### Thalia
 
-![thalia](https://github.com/pke/brickmerge-userscript/blob/master/images/thalia.png?raw=true)
+![thalia](https://github.com/pke/brickmerge-userscript/blob/master/images/www.thalia.de.png?raw=true)
 
 <img src="./public/images/brickmerge.svg" style="background:#b00;height:32px;padding: 0.3rem"/>
 
