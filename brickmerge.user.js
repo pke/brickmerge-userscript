@@ -10,10 +10,10 @@
 // @match          https://www.alternate.de/LEGO/*
 // @match          https://www.alza.de/spielzeug/lego-*
 // @match          https://www.alza.at/spielzeug/lego-*
-// @match          https://www.amazon.de/LEGO-*
-// @match          https://www.amazon.de/*LEGO*
-// @match          https://www.amazon.de/dp/*
-// @match          https://www.amazon.de/*/dp/*
+// @match          https://www.amazon.*/LEGO-*
+// @match          https://www.amazon.*/*LEGO*
+// @match          https://www.amazon.*/*p/*
+// @match          https://www.amazon.*/*/*p/*
 // @match          https://www.bol.de/shop/home/artikeldetails/*
 // @match          https://www.digitalo.de/products/*/*-LEGO-*
 // @match          https://www.ebay.de/itm/*
@@ -78,6 +78,8 @@
             targetSelector: "#corePriceDisplay_desktop_feature_div,#corePrice_feature_div",
             testURL: "https://www.amazon.de/LEGO-43230-Disney-Kamera-Maus-Minifiguren/dp/B0BV7BMPVS",
         },
+        "www.amazon.fr": "www.amazon.de",
+        "www.amazon.es": "www.amazon.de",
         "www.mytoys.de": {
             targetSelector: ".prod-info__price-container",
             testURL: "https://www.mytoys.de/lego-lego-disney-43230-kamera--hommage-an-walt-disney-29981540.html",
