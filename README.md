@@ -41,10 +41,10 @@ Diese Regel kann dazu in uMatrix eingefügt werden:
 * ![proshop.de Logo](https://www.google.com/s2/favicons?sz=16&domain=proshop.de) proshop.de
 * ![saturn.de Logo](https://www.google.com/s2/favicons?sz=16&domain=saturn.de) saturn.de
 * ![shopdisney.de Logo](https://www.google.com/s2/favicons?sz=16&domain=shopdisney.de) shopdisney.de
-* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=smythstoys.de) smythstoys.de
-* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=steinehelden.de) steinehelden.de
-* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=thalia.de) thalia.de
-* ![kleinanzeigen.de Logo](https://www.google.com/s2/favicons?sz=16&domain=toys-for-fun.com) toys-for-fun.com
+* ![smythstoys.de Logo](https://www.google.com/s2/favicons?sz=16&domain=smythstoys.de) smythstoys.de
+* ![steinehelden.de Logo](https://www.google.com/s2/favicons?sz=16&domain=steinehelden.de) steinehelden.de
+* ![thalia.de Logo](https://www.google.com/s2/favicons?sz=16&domain=thalia.de) thalia.de
+* ![toys-for-fun.com Logo](https://www.google.com/s2/favicons?sz=16&domain=toys-for-fun.com) toys-for-fun.com
 
 ## Neuen Shop vorschlagen
 
