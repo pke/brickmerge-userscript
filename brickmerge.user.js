@@ -106,8 +106,10 @@
             testURL: "https://www.proshop.de/LEGO/LEGO-Ideas-21343-Wikingerdorf/3195765",
         },
         "www.alternate.de": {
-            targetSelector: "#product-top-right .vat-and-shipping-costs",
-            testURL: "https://www.alternate.de/LEGO/10311-Creator-Expert-Orchidee-Konstruktionsspielzeug/html/product/1818749",
+          parent: true,
+          prepend: true,
+          targetSelector: "#product-top-right .price",
+          testURL: "https://www.alternate.de/LEGO/10311-Creator-Expert-Orchidee-Konstruktionsspielzeug/html/product/1818749",
         },
         "www.saturn.de": {
             targetSelector: "div[data-test='mms-pdp-offer-selection']",
