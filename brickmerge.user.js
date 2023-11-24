@@ -38,6 +38,7 @@
 // @downloadURL    https://raw.githubusercontent.com/pke/brickmerge-userscript/master/brickmerge.user.js
 // @run-at         document-end
 // @grant          GM_xmlhttpRequest
+// @grant          GM_info
 // @connect        hypermedia.rocks
 // @connect        *
 // ==/UserScript==
@@ -45,6 +46,25 @@
 (function() {
     'use strict';
     'use esversion:11';
+
+    // In tests this function is not defined and can't be injected via Page.evaluate nor Page.evaluateOnNewDocument
+    if (!window.GM_xmlhttpRequest) {
+      window.GM_xmlhttpRequest = function({ url, onload, headers }) {
+        fetch(url, { headers })
+          .then(response => response.text())
+          .then(responseText => onload({ responseText }))
+      }
+    }
+
+    if (!window.GM_info) {
+      window.GM_info = {
+        scriptHandler: "Violentmonkey",
+        version: "4.0.0",
+        script: {
+          version: "1.27.0",
+        }
+      }
+    }
 
     const style = `
      .brickmerge-price {
@@ -268,13 +288,15 @@
 
     function fetchPrice() {
         GM_xmlhttpRequest({
-            method: "GET",
             url: "https://brickmerge-userscript.hypermedia.rocks/lowest/" + setNumber,
+            headers: {
+              "User-Agent": `${navigator.userAgent} brickmerge/${GM_info.script.version} ${GM_info.scriptHandler}/${GM_info.version}`,
+            },
             onload(response) {
               const json = JSON.parse(response.responseText);
               const { title, links } = json;
-              const icon = links.find(link => link.rel == "icon") || { href: logo };
-              const link = links.find(link => link.rel == "self");
+              const icon = links.find(link => link.rel.includes("icon")) || { href: logo };
+              const link = links.find(link => link.rel.includes("self"));
               addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
             }
         });

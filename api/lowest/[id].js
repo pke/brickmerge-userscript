@@ -1,6 +1,7 @@
 import UserAgent from "user-agents"
 import util from "util"
 const trace = util.debuglog("trace")
+import semverGt from "semver/functions/gt"
 
 function log(object) {
   if (object instanceof Response) {
@@ -49,27 +50,28 @@ function fetchSmytstoysPrice(id) {
   }))
 }
 
-function createResponse({ title, href, price, currency = "EUR", icon, iconType = "image/x-icon", iconClass }) {
+function createResponse({ title, href, price, currency = "EUR", icon, iconType = "image/x-icon", iconClass, version = "1.26.0" }) {
   return {
     title,
     links: [
       {
-        rel: "self",
+        rel: semverGt(version, "1.26.0") ? ["self"] : "self",
         title: isNaN(price) ? "unbekannt" : Number(price).toLocaleString("de-DE", {style: "currency", currency }),
         href
       },
       icon && {
-        rel: "icon",
+        rel: semverGt(version, "1.26.0") ? ["icon"] : "icon",
         class: iconClass && [iconClass],
         type: iconType,
         href: icon,
-      }
+      },
     ].filter(Boolean),
   }
 }
 
 export default function lowestPrice(req, res) {
   const { id } = req.query;
+  const [, brickmergeVersion] = /brickmerge\/(\d+.\d+.\d+)/i.exec(req.headers["user-agent"]) || []
 
   Promise.allSettled([
     fetchBrickmergePrice(id),
@@ -90,6 +92,7 @@ export default function lowestPrice(req, res) {
     }
     //console.log("best", best)
     if (best) {
+      best.version = brickmergeVersion
       res.status(200);
       res.setHeader("Content-Type", "application/siren+json");
       res.setHeader("Access-Control-Allow-Origin", "*");
