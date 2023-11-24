@@ -117,7 +117,7 @@
             testURL: "https://www.jb-spielwaren.de/lego-10293-besuch-des-weihnachtsmanns/a-10293/",
         },
         "steinehelden.de": {
-            articleExtractor: /(\d+)/,
+            articleExtractor: /(\d{4,})/,
             targetSelector: "div[itemprop=offers] .product--tax",
             testURL: "https://steinehelden.de/city-arktis-schneemobil-60376/",
         },
@@ -191,7 +191,7 @@
             targetSelector: "div.prices",
         },
         "www.lego.com": {
-            articleExtractor: /(\d+)/,
+            articleExtractor: /(\d{4,})/,
             parent: true,
             dynamic: true,
             targetSelector: "div[class^='ProductOverviewstyles__PriceAvailabilityWrapper-'] span[data-test='product-price']",
