@@ -55,7 +55,7 @@ Oder selber einen PR erstellen ;)
 
 ### alternate
 
-![alternate](https://github.com/pke/brickmerge-userscript/blob/master/images/alternate.png?raw=true)
+![alternate](https://github.com/pke/brickmerge-userscript/blob/master/images/www.alternate.de.png?raw=true)
 
 ### alza
 
@@ -79,7 +79,7 @@ Oder selber einen PR erstellen ;)
 
 ### MediaMarkt
 
-![MediaMarkt](https://github.com/pke/brickmerge-userscript/blob/master/images/mediamarkt.png?raw=true)
+![MediaMarkt](https://github.com/pke/brickmerge-userscript/blob/master/images/www.mediamarkt.de.png?raw=true)
 
 ### MyToys
 
@@ -87,7 +87,7 @@ Oder selber einen PR erstellen ;)
 
 ### Saturn
 
-![saturn](https://github.com/pke/brickmerge-userscript/blob/master/images/saturn.png?raw=true)
+![saturn](https://github.com/pke/brickmerge-userscript/blob/master/images/www.saturn.de.png?raw=true)
 
 ### Smythstoys
 
@@ -98,7 +98,7 @@ Oder selber einen PR erstellen ;)
 ![toys-for-fun](https://github.com/pke/brickmerge-userscript/blob/master/images/www.toys-for-fun.de.png?raw=true)
 ### Mueller
 
-![mueller](https://github.com/pke/brickmerge-userscript/blob/master/images/mueller.png?raw=true)
+![mueller](https://github.com/pke/brickmerge-userscript/blob/master/images/www.mueller.de.png?raw=true)
 
 ### Thalia
 
