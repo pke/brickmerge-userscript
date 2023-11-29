@@ -32,6 +32,7 @@
 // @match          https://steinehelden.de/*
 // @match          https://www.thalia.de/shop/home/artikeldetails/*
 // @match          https://www.toys-for-fun.com/de/lego*
+// @match          https://www.toymi.eu/LEGO-*
 // @icon           https://www.google.com/s2/favicons?sz=64&domain=brickmerge.de
 // @homepageURL	   https://github.com/pke/brickmerge-userscript
 // @supportURL     https://github.com/pke/brickmerge-userscript/discussions
@@ -195,6 +196,11 @@
             parent: true,
             dynamic: true,
             targetSelector: "div[class^='ProductOverviewstyles__PriceAvailabilityWrapper-'] span[data-test='product-price']",
+        },
+        "www.toymi.eu": {
+            targetSelector: ".price.h1",
+            parent: true,
+            prepend: true,
         },
     };
 

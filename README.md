@@ -44,6 +44,7 @@ Diese Regel kann dazu in uMatrix eingefügt werden:
 * ![smythstoys.de Logo](https://www.google.com/s2/favicons?sz=16&domain=smythstoys.de) smythstoys.de
 * ![steinehelden.de Logo](https://www.google.com/s2/favicons?sz=16&domain=steinehelden.de) steinehelden.de
 * ![thalia.de Logo](https://www.google.com/s2/favicons?sz=16&domain=thalia.de) thalia.de
+* ![www.toymi.eu](https://www.google.com/s2/favicons?sz=16&domain=www.toymi.eu) www.toymi.eu
 * ![toys-for-fun.com Logo](https://www.google.com/s2/favicons?sz=16&domain=toys-for-fun.com) toys-for-fun.com
 
 ## Neuen Shop vorschlagen
