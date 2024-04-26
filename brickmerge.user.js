@@ -8,6 +8,7 @@
 // @description:de Zeigt den bisherigen Bestpreis von brickmerge® parallel zum aktuellen Preis an
 // @author         Philipp Kursawe <pke@pke.fyi>
 // @match          https://www.alternate.de/LEGO/*
+// @match          https://www.alternate.de/html/product/*
 // @match          https://www.alza.de/spielzeug/lego-*
 // @match          https://www.alza.at/spielzeug/lego-*
 // @match          https://www.amazon.*/LEGO-*
