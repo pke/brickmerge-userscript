@@ -235,44 +235,47 @@
     }
 
     function addPriceToTargets(resolver, priceOrError, url, styleClasses, title, icon, iconClass) {
-        const targets = document.querySelectorAll(resolver.targetSelector);
-        if (targets.length === 0) {
-            // console.log(`Target ${resolver.targetSelector} not found`);
-            return;
-        }
-        if (!document.querySelector("head style.brickmerge")) {
-            const styleElement = document.createElement("style");
-            styleElement.className = "brickmerge";
-            styleElement.type = 'text/css';
-            styleElement.innerHTML = style;
-            document.head.appendChild(styleElement);
-        }
-        const error = priceOrError instanceof Error && priceOrError
-        const price = error ? undefined : priceOrError
-        if (error instanceof Error) {
-            for (let element of targets) {
-                if (resolver.parent) {
-                    element = element.parentElement
-                }
-                renderError(element, error, resolver.prepend ? "prepend" : "append");
-            }
-        } else if (price) {
-            for (let element of targets) {
-                if (resolver.parent) {
-                    element = element.parentElement
-                }
-                //console.log("target:", element.innerHTML);
-                const box = addLowestPrice(element, title, url, price, resolver.prepend ? "prepend" : "append", icon, iconClass);
-                if (styleClasses) {
-                    box.classList.add(...styleClasses.split(" "));
-                }
-                if (typeof resolver.style === "function") {
-                    resolver.style(box);
-                } else if (typeof resolver.style === "string") {
-                    box.style = resolver.style;
-                }
-            }
-        }
+        const wait = (resolver.dynamic && priceOrError !== "...") ? new Promise(resolve => setTimeout(resolve, 1000)) : Promise.resolve()
+        wait.then(() => {
+          const targets = document.querySelectorAll(resolver.targetSelector);
+          if (targets.length === 0) {
+              // console.log(`Target ${resolver.targetSelector} not found`);
+              return;
+          }
+          if (!document.querySelector("head style.brickmerge")) {
+              const styleElement = document.createElement("style");
+              styleElement.className = "brickmerge";
+              styleElement.type = 'text/css';
+              styleElement.innerHTML = style;
+              document.head.appendChild(styleElement);
+          }
+          const error = priceOrError instanceof Error && priceOrError
+          const price = error ? undefined : priceOrError
+          if (error instanceof Error) {
+              for (let element of targets) {
+                  if (resolver.parent) {
+                      element = element.parentElement
+                  }
+                  renderError(element, error, resolver.prepend ? "prepend" : "append");
+              }
+          } else if (price) {
+              for (let element of targets) {
+                  if (resolver.parent) {
+                      element = element.parentElement
+                  }
+                  //console.log("target:", element.innerHTML);
+                  const box = addLowestPrice(element, title, url, price, resolver.prepend ? "prepend" : "append", icon, iconClass);
+                  if (styleClasses) {
+                      box.classList.add(...styleClasses.split(" "));
+                  }
+                  if (typeof resolver.style === "function") {
+                      resolver.style(box);
+                  } else if (typeof resolver.style === "string") {
+                      box.style = resolver.style;
+                  }
+              }
+          }
+        })
     }
 
     let resolver = resolvers[document.location.host]
@@ -284,38 +287,48 @@
         return;
     }
 
-    // Fetch the LEGO set number from the title
-    //console.log("title: ", document.title);
-    const [, setNumber] = (resolver.articleExtractor || /LEGO.*?(\d{4,})/i).exec(document.title) || [];
-    //console.log("set number: ", setNumber);
-
     const styleNode = document.querySelector(resolver.styleSelector);
     // console.log("styleNode", styleNode);
     const styleClasses = styleNode?.className;
 
-    function fetchPrice() {
-        GM_xmlhttpRequest({
-            url: "https://brickmerge-userscript.hypermedia.rocks/lowest/" + setNumber,
-            headers: {
-              "User-Agent": `${navigator.userAgent} brickmerge/${GM_info.script.version} ${GM_info.scriptHandler}/${GM_info.version}`,
-            },
-            onload(response) {
-              const json = JSON.parse(response.responseText);
-              const { title, links } = json;
-              const icon = links.find(link => link.rel.includes("icon")) || { href: logo };
-              const link = links.find(link => link.rel.includes("self"));
-              addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
-            }
-        });
+    function getSetNumber() {
+      const [, setNumber] = (resolver.articleExtractor || /LEGO.*?(\d{4,})/i).exec(document.title) || [];
+      return setNumber
     }
 
-    if (!setNumber) {
+    function fetchPrice() {
+      addPriceToTargets(resolver, "...", "", styleClasses);
+
+      GM_xmlhttpRequest({
+          url: "https://brickmerge-userscript.hypermedia.rocks/lowest/" + getSetNumber(),
+          headers: {
+            "User-Agent": `${navigator.userAgent} brickmerge/${GM_info.script.version} ${GM_info.scriptHandler}/${GM_info.version}`,
+          },
+          onload(response) {
+            const json = JSON.parse(response.responseText);
+            const { title, links } = json;
+            const icon = links.find(link => link.rel.includes("icon")) || { href: logo };
+            const link = links.find(link => link.rel.includes("self"));
+            addPriceToTargets(resolver, link.title, link.href, styleClasses, title, icon.href, icon.class);
+          }
+      });
+    }
+
+    if (!getSetNumber()) {
         return;
     }
-    addPriceToTargets(resolver, "...", "", styleClasses);
-    /*if (resolver.dynamic) {
+
+    if (resolver.dynamic) {
+      new MutationObserver(function(mutations) {
+          console.log(mutations[0].target.nodeValue);
+          fetchPrice();
+      }).observe(
+          document.querySelector('title'),
+          { subtree: true, characterData: true, childList: true }
+      );
+    }
         // Create an observer instance linked to the callback function
-        const observer = new MutationObserver((mutations) => {
+        /*const observer = new MutationObserver((mutations) => {
             for (const mutation of mutations) {
                 if (mutation.type === "characterData") {
                     if (mutation.target.querySelector?.(resolver.targetSelector)) {
