@@ -3,50 +3,47 @@ import util from "util"
 const trace = util.debuglog("trace")
 import semverGt from "semver/functions/gt"
 
-function log(object) {
-  if (object instanceof Response) {
-    trace("%s %s [%d %s]", object.method, object.host, object.status, object.statusText)
-  } else {
-    trace(object)
+function log(name) {
+  return (object) => {
+    if (object instanceof Response) {
+      trace("%s: [%d %s]", name, object.status, object.statusText)
+    } else {
+      trace("%s %o", name, object)
+    }
+    return object
   }
-  return object
 }
 
 function fetchSmytstoysPrice(id) {
-  const url = `https://uath9oahyf-dsn.algolia.net/1/indexes/*/queries`
+  const url = `https://www.smythstoys.com/de/de-de/search/autocomplete/SearchBox?term=${id}`
   return fetch(url, {
-    method: "POST",
     headers: {
       "User-Agent": (new UserAgent()).toString(),
-      "Content-Type": "application/json",
-      "x-algolia-application-id": "UATH9OAHYF",
-      "x-algolia-api-key": "5913bdd0fed49d7c87acd04998565993",
       "Referer": "https://www.smythstoys.com",
-    },
-    body: `{"requests":[{"indexName": "prod_PRODUCTS_DE_de","query": "LEGO ${id}","params": "hitsPerPage=1"}]}`,
+    }
    })
-  .then(log)
+  .then(log("smyths-response"))
   .then(result => result.json())
-  .then(({results}) => results?.[0].hits?.[0])
-  .then(log)
-  .then(result => {
-    const { productName } = result
+  .then(({products}) => products?.[0])
+  .then(log("smyths-product"))
+  .then(product => {
+    const { namePlainText } = product
     // Get set number from productName and compare to searched id
-    const foundSetNumber = /LEGO.*?(\d+)/i.exec(productName)?.[1]
+    const foundSetNumber = /LEGO.*?(\d+)/i.exec(namePlainText)?.[1]
     if (foundSetNumber == id) {
-      return result
+      return product
     } else {
       throw new Error(`LEGO® set with ${id} not found on smythstoys.`)
     }
   })
-  .then(({ url, priceValue, currency }) => ({
+  .then(({ url, price }) => ({
     title: "Smythstoys Bestpreis",
     icon: "https://image.smythstoys.com/images/ico/de/favicon.ico",
     iconType: "image/png",
     iconClass: "small",
     href: "https://www.smythstoys.com/de/de-de" + url,
-    price: priceValue,
-    currency,
+    price: price.value,
+    currency: price.currencyIso,
   }))
 }
 
@@ -69,7 +66,21 @@ function createResponse({ title, href, price, currency = "EUR", icon, iconType =
   }
 }
 
+function errorResponse(req, res, status, message) {
+  // Setting the statusCode with res.statusCode ||= 500 does NOT work!
+  res.status(status || 500);
+  res.setHeader("Content-Type", "application/problem+json");
+  res.json({
+    title: "Error",
+    status: status,
+    detail: message,
+  })
+}
+
 export default function lowestPrice(req, res) {
+  if (req.method !== "GET") {
+    return errorResponse(req, res, 405, "Method not allowed")
+  }
   const { id } = req.query;
   const [, brickmergeVersion] = /brickmerge\/(\d+.\d+.\d+)/i.exec(req.headers["user-agent"]) || []
 
@@ -77,7 +88,7 @@ export default function lowestPrice(req, res) {
     fetchBrickmergePrice(id),
     fetchSmytstoysPrice(id),
   ])
-  .then(log)
+  .then(log("allSettled"))
   .then(results => {
     const [brickMergeResult] = results
     const brickMergeAllTimeBestprice = brickMergeResult.status === "fulfilled" && /BESTPREIS/.test(brickMergeResult.value?.title) && brickMergeResult.value?.price
@@ -87,7 +98,7 @@ export default function lowestPrice(req, res) {
       .sort((a, b) => a.price - b.price)
     // Fix shop prices that are not listed on BM (i.e. smythstoys)
     // which can have an even better price than the recorded on BM
-    if (best?.price < brickMergeAllTimeBestprice) {
+    if (best?.price <= brickMergeAllTimeBestprice) {
       best.title = "ALL-TIME-BESTPREIS"
     }
     //console.log("best", best)
@@ -102,23 +113,16 @@ export default function lowestPrice(req, res) {
       throw new Error(`LEGO ${id} not found`)
     }
   }).catch(error => {
-    // Setting the statusCode with res.statusCode ||= 500 does NOT work!
-    res.status(res.statusCode || 500);
-    res.setHeader("Content-Type", "application/problem+json");
-    res.json({
-      title: "Error",
-      status: res.statusCode,
-      detail: error.message,
-    })
+    errorResponse(req, res, res.statusCode || 500, error.message)
   })
 }
 
 function fetchBrickmergePrice(id) {
   const url = `https://www.brickmerge.de/_app.php?find=${id}&json_token=${process.env.API_KEY}`
-  log(url)
+  log("fetchBrickmergePrice", url)
 
   return fetch(url)
-      .then(log)
+      .then(log("brickmerge"))
       .then(res => {
         if (res.ok && res.status === 200) {
           return res
