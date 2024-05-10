@@ -117,6 +117,13 @@ export default function lowestPrice(req, res) {
   })
 }
 
+function getBrickmergeTitle(additionalProperty = []) {
+  if (!Array.isArray(additionalProperty)) {
+    additionalProperty = [additionalProperty]
+  }
+  return additionalProperty.find(prop => prop.name === "All-Time-Bestpreis" && prop.value === "true" ) ? "ALL-TIME-BESTPREIS" : "Bestpreis"
+}
+
 function fetchBrickmergePrice(id) {
   const url = `https://www.brickmerge.de/_app.php?find=${id}&json_token=${process.env.API_KEY}`
   log("fetchBrickmergePrice", url)
@@ -133,7 +140,7 @@ function fetchBrickmergePrice(id) {
       })
       .then(res => res.json())
       .then(({ offers, url, additionalProperty }) => ({
-        title: (/All-Time/.test(additionalProperty?.name) && additionalProperty.value === "true") ? "ALL-TIME-BESTPREIS" : "Bestpreis",
+        title: getBrickmergeTitle(additionalProperty),
         icon: "https://raw.githubusercontent.com/pke/brickmerge-userscript/master/public/images/brickmerge.svg",
         iconType: "image/svg+xml",
         href: url,
