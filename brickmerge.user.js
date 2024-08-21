@@ -24,7 +24,6 @@
 // @match          https://www.lego.com/de-de/product/*
 // @match          https://www.mediamarkt.de/de/product/_lego-*
 // @match          https://www.mueller.de/p/lego-*
-// @match          https://www.mytoys.de/lego-*
 // @match          https://www.otto.de/p/lego-*
 // @match          https://www.proshop.de/LEGO/*
 // @match          https://www.shopdisney.de/lego-*
@@ -102,10 +101,6 @@
         },
         "www.amazon.fr": "www.amazon.de",
         "www.amazon.es": "www.amazon.de",
-        "www.mytoys.de": {
-            targetSelector: ".prod-info__price-container",
-            testURL: "https://www.mytoys.de/lego-lego-disney-43230-kamera--hommage-an-walt-disney-29981540.html",
-        },
         "www.smythstoys.com": {
             targetSelector: "#product-info div[itemprop=price]",
             testURL: "https://www.smythstoys.com/de/de-de/spielzeug/lego/lego-fuer-erwachsene/lego-icons-set-10266-nasa-apollo-11-mondlandefaehre/p/183613",
