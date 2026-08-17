@@ -8,6 +8,6 @@
     "@cliqz/adblocker-puppeteer": "1.26.12",
     "@duckduckgo/autoconsent": "1.0.8",
     "jest": "29.7.0",
-    "puppeteer": "21.5.2"
+    "puppeteer": "25.8.0"
   }
 }
